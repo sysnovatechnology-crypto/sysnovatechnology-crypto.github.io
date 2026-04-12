@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galleria — Sysnovatechnology</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .filter-bar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+
+    .filter-btn {
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 8px 18px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--yellow);
+      color: var(--black);
+      border-color: var(--yellow);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .gallery-item {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--card);
+      cursor: pointer;
+      transition: transform 0.25s, border-color 0.2s;
+      aspect-ratio: 4/3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .gallery-item:hover {
+      transform: scale(1.03);
+      border-color: var(--yellow);
+    }
+
+    .gallery-item.hidden { display: none; }
+
+    .gallery-placeholder {
+      font-size: 3rem;
+    }
+
+    .gallery-label {
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: center;
+      padding: 0 12px;
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      opacity: 0;
+      transition: opacity 0.2s;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+    .gallery-overlay-title {
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: 1.1rem;
+      color: var(--yellow);
+    }
+
+    .gallery-overlay-desc {
+      font-size: 0.8rem;
+      color: #ccc;
+      line-height: 1.5;
+    }
+
+    /* Upload box */
+    .upload-note {
+      background: var(--card);
+      border: 2px dashed var(--border);
+      border-radius: 8px;
+      padding: 32px;
+      text-align: center;
+      margin-top: 32px;
+    }
+
+    .upload-note p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.7;
+      margin-top: 8px;
+    }
+
+    .upload-note .icon { font-size: 2.5rem; margin-bottom: 8px; }
+
+    .upload-note code {
+      background: #2a2a2a;
+      color: var(--yellow);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="index.html">⚡ SYSNOVA</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="presentazione.html">Chi sono</a></li>
+      <li><a href="galleria.html" class="active">Galleria</a></li>
+      <li><a href="contatti.html">Contatti</a></li>
+    </ul>
+  </nav>
+
+  <div class="stripe-bar top"></div>
+
+  <div class="page">
+
+    <div class="hero fade-in">
+      <div class="hero-tag">📸 I miei lavori</div>
+      <h1>Gal<span>leria</span></h1>
+      <p>Una selezione di riparazioni e interventi tecnici. Ogni foto racconta un dispositivo riportato in vita.</p>
+    </div>
+
+    <div class="section">
+
+      <div class="filter-bar">
+        <button class="filter-btn active" onclick="filterGallery('tutti', this)">Tutti</button>
+        <button class="filter-btn" onclick="filterGallery('smartphone', this)">Smartphone</button>
+        <button class="filter-btn" onclick="filterGallery('tv', this)">TV & Monitor</button>
+        <button class="filter-btn" onclick="filterGallery('dati', this)">Recupero dati</button>
+        <button class="filter-btn" onclick="filterGallery('altro', this)">Altro</button>
+      </div>
+
+      <div class="gallery-grid" id="gallery">
+
+        <div class="gallery-item fade-in" data-cat="smartphone">
+          <div class="gallery-placeholder">📱</div>
+          <div class="gallery-label">Sostituzione display</div>
+          <div class="gallery-overlay">
+            <div class="gallery-overlay-title">Display Rotto</div>
+            <div class="gallery-overlay-desc">Sostituzione display e vetro su Samsung Galaxy. Risultato: come nuovo.</div>
+          </div>
+        </div>
+
+        <div class="gallery-item fade-in" data-cat="dati">
+          <div class="gallery-placeholder">💾</div>
+          <div class="gallery-label">Recupero eMMC</div>
+          <div class="gallery-overlay">
+            <div class="gallery-overlay-title">Recupero Dati</div>
+            <div class="gallery-overlay-desc">Chip-off eMMC da scheda madre danneggiata. Dati recuperati al 100%.</div>
+          </div>
+        </div>
+
+        <div class="gallery-item fade-in" data-cat="tv">
+          <div class="gallery-placeholder">📺</div>
+          <div class="gallery-label">Scheda main TV</div>
+          <div class="gallery-overlay">
+            <div class="gallery-overlay-title">TV Spento</div>
+            <div class="gallery-overlay-desc">Sostituzione scheda main su LG 55". TV riportato in funzione.</div>
+          </div>
+        </div>
+
+        <div class="gallery-item fade-in" data-cat="smartphone">
+          <div class="gallery-placeholder">🔋</div>
+          <div class="gallery-label">Sostituzione batteria</div>
+          <div class="gallery-overlay">
+            <div class="gallery-overlay-title">Batteria Gonfia</div>
+            <div class="gallery-overlay-desc">Batteria gonfia rimossa in sicurezza e sostituita su iPhone 11.</div>
+          </div>
+        </div>
+
+        <div class="gallery-item fade-in" data-cat="altro">
+          <div class="gallery-placeholder">🖥️</div>
+          <div class="gallery-label">Riparazione laptop</div>
+          <div class="gallery-overlay">
+            <div class="gallery-overlay-title">Laptop No POST</div>
+            <div class="gallery-overlay-desc">Diagnosi e sostituzione chip BIOS su laptop Asus. Risolto.</div>
+          </div>
+        </div>
+
+        <div class="gallery-item fade-in" data-cat="tv">
+          <div class="gallery-placeholder">🔌</div>
+          <div class="gallery-label">Alimentatore TV</div>
+          <div class="gallery-overlay">
+            <div class="gallery-overlay-title">Alimentatore Bruciato</div>
+            <div class="gallery-overlay-desc">Sostituzione condensatori e transistor su scheda alimentatore.</div>
+          </div>
+        </div>
+
+        <div class="gallery-item fade-in" data-cat="dati">
+          <div class="gallery-placeholder">🔬</div>
+          <div class="gallery-label">Micro-saldatura BGA</div>
+          <div class="gallery-overlay">
+            <div class="gallery-overlay-title">BGA Reballing</div>
+            <div class="gallery-overlay-desc">Reballing chip grafico su scheda madre. Operazione sotto microscopio.</div>
+          </div>
+        </div>
+
+        <div class="gallery-item fade-in" data-cat="smartphone">
+          <div class="gallery-placeholder">🔧</div>
+          <div class="gallery-label">Porta di ricarica</div>
+          <div class="gallery-overlay">
+            <div class="gallery-overlay-title">Ricarica Impossibile</div>
+            <div class="gallery-overlay-desc">Sostituzione connettore USB-C su Xiaomi. Ricarica ripristinata.</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="upload-note fade-in">
+        <div class="icon">🖼️</div>
+        <strong style="color: var(--yellow);">Vuoi aggiungere le tue foto reali?</strong>
+        <p>
+          Carica le immagini nel repository GitHub nella cartella <code>img/</code> e sostituisci le icone con tag <code>&lt;img&gt;</code>.<br>
+          Posso aiutarti a farlo quando sei pronto!
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="stripe-bar bottom"></div>
+
+  <script>
+    function filterGallery(cat, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.gallery-item').forEach(item => {
+        if (cat === 'tutti' || item.dataset.cat === cat) {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>

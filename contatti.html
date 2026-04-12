@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contatti — Sysnovatechnology</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-bottom: 48px;
+    }
+
+    .contact-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      text-decoration: none;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .contact-card:hover {
+      border-color: var(--yellow);
+      transform: translateY(-4px);
+    }
+
+    .contact-icon { font-size: 2.2rem; }
+
+    .contact-type {
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .contact-value {
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: 1.1rem;
+      color: var(--yellow);
+      letter-spacing: 1px;
+      word-break: break-all;
+    }
+
+    .contact-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* Form */
+    .form-wrap {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 36px;
+      max-width: 600px;
+    }
+
+    .form-title {
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: 1.4rem;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    input, textarea, select {
+      background: #111;
+      border: 1px solid var(--border);
+      color: var(--white);
+      font-family: 'Barlow', sans-serif;
+      font-size: 1rem;
+      padding: 12px 14px;
+      border-radius: 6px;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--yellow);
+    }
+
+    textarea { resize: vertical; min-height: 120px; }
+
+    select option { background: #1e1e1e; }
+
+    .form-note {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 12px;
+      line-height: 1.6;
+    }
+
+    .success-msg {
+      display: none;
+      background: rgba(255,208,0,0.1);
+      border: 1px solid var(--yellow);
+      border-radius: 6px;
+      padding: 16px;
+      color: var(--yellow);
+      font-weight: 700;
+      text-align: center;
+      margin-top: 16px;
+      letter-spacing: 1px;
+    }
+
+    .map-placeholder {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      height: 180px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: 32px;
+    }
+
+    .map-placeholder .icon { font-size: 2.5rem; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="index.html">⚡ SYSNOVA</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="presentazione.html">Chi sono</a></li>
+      <li><a href="galleria.html">Galleria</a></li>
+      <li><a href="contatti.html" class="active">Contatti</a></li>
+    </ul>
+  </nav>
+
+  <div class="stripe-bar top"></div>
+
+  <div class="page">
+
+    <div class="hero fade-in">
+      <div class="hero-tag">📬 Parliamoci</div>
+      <h1>Con<span>tatti</span></h1>
+      <p>Hai un dispositivo da riparare o una domanda tecnica? Scrivimi, rispondo entro 24 ore.</p>
+    </div>
+
+    <div class="section">
+
+      <!-- Card contatti -->
+      <div class="section-title">Dove trovarmi</div>
+      <div class="section-divider"></div>
+
+      <div class="contact-grid">
+
+        <a class="contact-card fade-in" href="mailto:info@sysnovatechnology.it">
+          <div class="contact-icon">📧</div>
+          <div class="contact-type">Email</div>
+          <div class="contact-value">info@sysnovatechnology.it</div>
+          <div class="contact-desc">Per preventivi, richieste e informazioni tecniche.</div>
+        </a>
+
+        <a class="contact-card fade-in" href="tel:+390000000000">
+          <div class="contact-icon">📞</div>
+          <div class="contact-type">Telefono / WhatsApp</div>
+          <div class="contact-value">+39 000 000 0000</div>
+          <div class="contact-desc">Disponibile dal lunedì al sabato, 9:00–18:00.</div>
+        </a>
+
+        <a class="contact-card fade-in" href="https://instagram.com/" target="_blank">
+          <div class="contact-icon">📸</div>
+          <div class="contact-type">Instagram</div>
+          <div class="contact-value">@sysnovatechnology</div>
+          <div class="contact-desc">Foto dei lavori, before/after e aggiornamenti.</div>
+        </a>
+
+        <a class="contact-card fade-in" href="https://linkedin.com/" target="_blank">
+          <div class="contact-icon">💼</div>
+          <div class="contact-type">LinkedIn</div>
+          <div class="contact-value">Salvatore —</div>
+          <div class="contact-desc">Profilo professionale e curriculum tecnico.</div>
+        </a>
+
+      </div>
+
+      <!-- Form -->
+      <div class="section-title">Inviami un messaggio</div>
+      <div class="section-divider"></div>
+
+      <div class="form-wrap fade-in">
+        <div class="form-title">📋 Descrivi il problema</div>
+
+        <div class="form-group">
+          <label>Il tuo nome</label>
+          <input type="text" id="nome" placeholder="Mario Rossi">
+        </div>
+
+        <div class="form-group">
+          <label>Email o telefono</label>
+          <input type="text" id="contatto" placeholder="mario@email.it oppure +39 333...">
+        </div>
+
+        <div class="form-group">
+          <label>Tipo di dispositivo</label>
+          <select id="tipo">
+            <option value="">— Seleziona —</option>
+            <option>Smartphone</option>
+            <option>Tablet</option>
+            <option>TV / Monitor</option>
+            <option>PC / Laptop</option>
+            <option>Recupero dati</option>
+            <option>Altro</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Descrivi il problema</label>
+          <textarea id="msg" placeholder="Es: Il mio Samsung Galaxy S21 non si accende più dopo una caduta..."></textarea>
+        </div>
+
+        <button class="btn" onclick="inviaMessaggio()">📩 Invia richiesta</button>
+
+        <p class="form-note">
+          ⚠️ Questo form è dimostrativo. Per inviarlo davvero dovrai collegare un servizio come <strong>Formspree</strong> o <strong>EmailJS</strong> — ti spiego come quando sei pronto!
+        </p>
+
+        <div class="success-msg" id="success">
+          ✅ Messaggio inviato! Ti rispondo entro 24 ore.
+        </div>
+      </div>
+
+      <div class="map-placeholder fade-in">
+        <div class="icon">📍</div>
+        <strong style="color: var(--white);">Aversa (CE), Campania</strong>
+        <span>Interventi a domicilio su appuntamento</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="stripe-bar bottom"></div>
+
+  <script>
+    function inviaMessaggio() {
+      const nome = document.getElementById('nome').value.trim();
+      const contatto = document.getElementById('contatto').value.trim();
+      const msg = document.getElementById('msg').value.trim();
+      if (!nome || !contatto || !msg) {
+        alert('Per favore compila almeno nome, contatto e descrizione del problema.');
+        return;
+      }
+      document.getElementById('success').style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>
