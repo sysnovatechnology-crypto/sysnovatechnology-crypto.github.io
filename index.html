@@ -1,280 +1,400 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lavori in Corso</title>
-  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Barlow:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --yellow: #FFD000;
-      --black: #111111;
-      --orange: #FF6B00;
-      --white: #F5F5F0;
-      --stripe-size: 60px;
-    }
- 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
- 
-    body {
-      background-color: var(--black);
-      color: var(--white);
-      font-family: 'Barlow', sans-serif;
-      min-height: 100vh;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
- 
-    /* Strisce animate in alto e in basso */
-    .stripe-bar {
-      position: fixed;
-      left: 0; right: 0;
-      height: 28px;
-      background: repeating-linear-gradient(
-        -45deg,
-        var(--yellow) 0px,
-        var(--yellow) var(--stripe-size),
-        var(--black) var(--stripe-size),
-        var(--black) calc(var(--stripe-size) * 2)
-      );
-      background-size: calc(var(--stripe-size) * 2) 100%;
-      animation: moveStripes 1.2s linear infinite;
-      z-index: 10;
-    }
-    .stripe-bar.top { top: 0; }
-    .stripe-bar.bottom { bottom: 0; }
- 
-    @keyframes moveStripes {
-      from { background-position: 0 0; }
-      to { background-position: calc(var(--stripe-size) * 2) 0; }
-    }
- 
-    /* Contenuto centrale */
-    .container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 32px;
-      text-align: center;
-      padding: 40px 24px;
-      animation: fadeIn 1s ease both;
-    }
- 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
- 
-    /* Scena cantiere con emoji animate */
-    .scene {
-      font-size: 3.5rem;
-      display: flex;
-      gap: 16px;
-      align-items: flex-end;
-      height: 80px;
-    }
- 
-    .cone {
-      display: inline-block;
-      animation: bounce 0.6s ease-in-out infinite alternate;
-    }
-    .cone:nth-child(1) { animation-delay: 0s; }
-    .cone:nth-child(3) { animation-delay: 0.2s; }
-    .cone:nth-child(5) { animation-delay: 0.4s; }
- 
-    @keyframes bounce {
-      from { transform: translateY(0px); }
-      to   { transform: translateY(-14px); }
-    }
- 
-    .excavator {
-      display: inline-block;
-      font-size: 4rem;
-      animation: digger 1.5s ease-in-out infinite;
-      transform-origin: bottom center;
-    }
- 
-    @keyframes digger {
-      0%, 100% { transform: rotate(-8deg); }
-      50%       { transform: rotate(8deg); }
-    }
- 
-    .helmet {
-      display: inline-block;
-      font-size: 3rem;
-      animation: nod 1s ease-in-out infinite alternate;
-    }
- 
-    @keyframes nod {
-      from { transform: rotate(-10deg); }
-      to   { transform: rotate(10deg); }
-    }
- 
-    /* Titolo principale */
-    .title {
-      font-family: 'Black Han Sans', sans-serif;
-      font-size: clamp(2.8rem, 10vw, 6rem);
-      line-height: 1;
-      color: var(--yellow);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      text-shadow: 4px 4px 0px var(--orange);
-    }
- 
-    /* Sottotitolo lampeggiante */
-    .subtitle {
-      font-size: clamp(1rem, 3vw, 1.4rem);
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 6px;
-      color: var(--white);
-      animation: blink 1.1s step-start infinite;
-    }
- 
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50%       { opacity: 0; }
-    }
- 
-    /* Barra progresso */
-    .progress-wrap {
-      width: min(420px, 90vw);
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
- 
-    .progress-label {
-      font-size: 0.8rem;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--yellow);
-      text-align: left;
-    }
- 
-    .progress-track {
-      height: 16px;
-      background: #333;
-      border-radius: 8px;
-      overflow: hidden;
-      border: 2px solid #444;
-    }
- 
-    .progress-fill {
-      height: 100%;
-      width: 0%;
-      background: repeating-linear-gradient(
-        -45deg,
-        var(--yellow) 0px,
-        var(--yellow) 8px,
-        var(--orange) 8px,
-        var(--orange) 16px
-      );
-      background-size: 22px 100%;
-      border-radius: 8px;
-      animation:
-        fillBar 4s ease-out 0.5s forwards,
-        moveStripes 0.4s linear infinite;
-    }
- 
-    @keyframes fillBar {
-      from { width: 0%; }
-      to   { width: 68%; }
-    }
- 
-    /* Messaggio */
-    .message {
-      font-size: 1rem;
-      color: #aaa;
-      max-width: 380px;
-      line-height: 1.6;
-    }
- 
-    /* Badge */
-    .badge {
-      background: var(--yellow);
-      color: var(--black);
-      font-family: 'Black Han Sans', sans-serif;
-      font-size: 0.85rem;
-      letter-spacing: 3px;
-      padding: 8px 20px;
-      border-radius: 4px;
-      text-transform: uppercase;
-      animation: pulse 2s ease-in-out infinite;
-    }
- 
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,208,0,0.4); }
-      50%       { transform: scale(1.04); box-shadow: 0 0 0 10px rgba(255,208,0,0); }
-    }
- 
-    /* Particelle di polvere */
-    .dust {
-      position: fixed;
-      bottom: 30px;
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: rgba(255, 208, 0, 0.5);
-      animation: riseDust 3s ease-in infinite;
-      pointer-events: none;
-    }
- 
-    @keyframes riseDust {
-      0%   { transform: translateY(0) scale(1); opacity: 0.6; }
-      100% { transform: translateY(-80vh) scale(0); opacity: 0; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulenze Tecniche - Salvatore</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0f0f0f;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 150, 255, 0.3);
+            border: 2px solid #0096ff;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #0096ff 0%, #0073cc 100%);
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255, 255, 255, 0.05) 10px,
+                rgba(255, 255, 255, 0.05) 20px
+            );
+            animation: slidePattern 20s linear infinite;
+        }
+
+        @keyframes slidePattern {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        h1 {
+            font-size: 32px;
+            color: white;
+            font-weight: 700;
+            margin-bottom: 5px;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .content {
+            padding: 30px 20px;
+        }
+
+        .problem {
+            background: rgba(255, 150, 0, 0.1);
+            border-left: 4px solid #ff9600;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        .problem-title {
+            color: #ff9600;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .problem-list {
+            list-style: none;
+            color: #ccc;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .problem-list li {
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .problem-list li::before {
+            content: '✗';
+            position: absolute;
+            left: 0;
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+
+        .solution {
+            background: linear-gradient(135deg, rgba(0, 200, 100, 0.1) 0%, rgba(0, 150, 80, 0.1) 100%);
+            border-left: 4px solid #00c864;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        .solution-title {
+            color: #00c864;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .services {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .service-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #00c864;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .service-item::before {
+            content: '✓';
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background: rgba(0, 200, 100, 0.2);
+            border-radius: 50%;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .pricing {
+            background: rgba(0, 150, 255, 0.05);
+            border: 1px solid rgba(0, 150, 255, 0.2);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+
+        .price-title {
+            color: #0096ff;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .price-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .price-item {
+            background: rgba(0, 150, 255, 0.1);
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid rgba(0, 150, 255, 0.3);
+        }
+
+        .price-label {
+            color: #aaa;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        .price-value {
+            color: #0096ff;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .cta-section {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .cta-text {
+            color: #aaa;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0096ff 0%, #0073cc 100%);
+            color: white;
+            flex: 1;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 150, 255, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(0, 150, 255, 0.1);
+            color: #0096ff;
+            border: 2px solid #0096ff;
+            flex: 1;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 150, 255, 0.2);
+        }
+
+        .footer {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(0, 150, 255, 0.2);
+        }
+
+        .footer-text {
+            color: #999;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .guarantee {
+            color: #00c864;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 28px;
+            }
+
+            .container {
+                max-width: 100%;
+            }
+
+            .price-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
- 
-  <div class="stripe-bar top"></div>
-  <div class="stripe-bar bottom"></div>
- 
-  <div class="container">
- 
-    <div class="scene">
-      <span class="cone">🚧</span>
-      <span class="excavator">🚜</span>
-      <span class="cone">🚧</span>
-      <span class="helmet">👷</span>
-      <span class="cone">🚧</span>
+    <div class="container">
+        <!-- HEADER -->
+        <div class="header">
+            <div class="header-content">
+                <div class="icon">🖥️</div>
+                <h1>Il tuo PC è in panne?</h1>
+                <p class="subtitle">Consulenze tecniche rapide ed efficaci</p>
+            </div>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="content">
+            <!-- PROBLEMI -->
+            <div class="problem">
+                <div class="problem-title">❌ I tuoi problemi</div>
+                <ul class="problem-list">
+                    <li>Outlook non sincronizza l'email</li>
+                    <li>PC lento o bloccato</li>
+                    <li>WiFi non funziona</li>
+                    <li>Virus o malware</li>
+                    <li>Stampante non funziona</li>
+                    <li>Dati importanti a rischio</li>
+                </ul>
+            </div>
+
+            <!-- SOLUZIONI -->
+            <div class="solution">
+                <div class="solution-title">✅ La mia soluzione</div>
+                <div class="services">
+                    <div class="service-item">Diagnosi rapida via telefono</div>
+                    <div class="service-item">Supporto remoto immediato</div>
+                    <div class="service-item">Intervento on-site se necessario</div>
+                    <div class="service-item">Risultati garantiti</div>
+                </div>
+            </div>
+
+            <!-- PRICING -->
+            <div class="pricing">
+                <div class="price-title">💰 Prezzi</div>
+                <div class="price-grid">
+                    <div class="price-item">
+                        <div class="price-label">Diagnosi</div>
+                        <div class="price-value">€25</div>
+                    </div>
+                    <div class="price-item">
+                        <div class="price-label">Supporto Remoto</div>
+                        <div class="price-value">€40</div>
+                    </div>
+                    <div class="price-item">
+                        <div class="price-label">Intervento 1h</div>
+                        <div class="price-value">€60-80</div>
+                    </div>
+                    <div class="price-item">
+                        <div class="price-label">Manutenzione 3m</div>
+                        <div class="price-value">€120</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="cta-section">
+                <p class="cta-text">👉 Contattami oggi e risolvi il tuo problema</p>
+                <div class="cta-buttons">
+                    <button class="btn btn-primary" onclick="openWhatsApp()">WhatsApp</button>
+                    <button class="btn btn-secondary" onclick="openTelegram()">Telegram</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <p class="footer-text">
+                🎯 <span class="guarantee">Risultati garantiti</span> • Professionista esperto • Zona Campania
+            </p>
+        </div>
     </div>
- 
-    <div class="title">Lavori<br>in Corso</div>
- 
-    <div class="subtitle">⚠ Sito in costruzione ⚠</div>
- 
-    <div class="progress-wrap">
-      <div class="progress-label">Avanzamento lavori</div>
-      <div class="progress-track">
-        <div class="progress-fill"></div>
-      </div>
-    </div>
- 
-    <p class="message">
-      Stiamo costruendo qualcosa di fantastico.<br>
-      Torna presto per scoprirlo! 🔨
-    </p>
- 
-    <div class="badge">🏗️ Coming Soon</div>
- 
-  </div>
- 
-  <!-- Particelle di polvere -->
-  <script>
-    for (let i = 0; i < 10; i++) {
-      const d = document.createElement('div');
-      d.className = 'dust';
-      d.style.left = Math.random() * 100 + 'vw';
-      d.style.animationDelay = (Math.random() * 3) + 's';
-      d.style.animationDuration = (2.5 + Math.random() * 2) + 's';
-      d.style.width = d.style.height = (5 + Math.random() * 8) + 'px';
-      document.body.appendChild(d);
-    }
-  </script>
- 
+
+    <script>
+        function openWhatsApp() {
+            const phone = '393508226604'; // Salvatore
+            const message = encodeURIComponent('Ciao! Avrei bisogno di una consulenza tecnica.');
+            window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
+        }
+
+        function openTelegram() {
+            const username = 'salvatore_tech'; // SOSTITUIRE CON TUO USERNAME
+            const message = encodeURIComponent('Ciao! Avrei bisogno di una consulenza tecnica.');
+            window.open(`https://t.me/${username}?text=${message}`, '_blank');
+        }
+    </script>
 </body>
 </html>
