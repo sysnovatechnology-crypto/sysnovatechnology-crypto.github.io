@@ -414,7 +414,18 @@
         </div>
     </div>
  
+    <!-- AUDIO DI SOTTOFONDO -->
+    <audio id="bgAudio" autoplay loop style="display: none;">
+        <source src="https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3" type="audio/mpeg">
+    </audio>
+ 
     <script>
+        // Controllo volume audio
+        const audio = document.getElementById('bgAudio');
+        if (audio) {
+            audio.volume = 0.3; // Volume al 30% (non invadente)
+        }
+ 
         function openWhatsApp() {
             const phone = '393508226604'; // Salvatore
             const message = encodeURIComponent('Ciao! Avrei bisogno di una consulenza tecnica.');
@@ -428,5 +439,4 @@
         }
     </script>
 </body>
-</html>
 </html>
