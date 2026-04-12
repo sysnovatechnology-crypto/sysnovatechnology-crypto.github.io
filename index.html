@@ -10,27 +10,57 @@
             padding: 0;
             box-sizing: border-box;
         }
-
+ 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #0f0f0f;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 50%, #dde5ed 100%);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             padding: 20px;
+            position: relative;
+            overflow-x: hidden;
         }
-
+ 
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 20% 50%, rgba(0, 150, 255, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(100, 200, 255, 0.06) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+ 
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 30%, rgba(0, 120, 255, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+ 
         .container {
+            position: relative;
+            z-index: 1;
             width: 100%;
             max-width: 500px;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 150, 255, 0.3);
-            border: 2px solid #0096ff;
+            box-shadow: 0 20px 60px rgba(0, 100, 200, 0.15);
+            border: 1px solid rgba(0, 150, 255, 0.2);
+            backdrop-filter: blur(10px);
         }
-
+ 
         .header {
             background: linear-gradient(135deg, #0096ff 0%, #0073cc 100%);
             padding: 30px 20px;
@@ -38,7 +68,7 @@
             position: relative;
             overflow: hidden;
         }
-
+ 
         .header::before {
             content: '';
             position: absolute;
@@ -55,28 +85,28 @@
             );
             animation: slidePattern 20s linear infinite;
         }
-
+ 
         @keyframes slidePattern {
             0% { transform: translate(0, 0); }
             100% { transform: translate(50px, 50px); }
         }
-
+ 
         .header-content {
             position: relative;
             z-index: 1;
         }
-
+ 
         .icon {
             font-size: 48px;
             margin-bottom: 10px;
             animation: float 3s ease-in-out infinite;
         }
-
+ 
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
         }
-
+ 
         h1 {
             font-size: 32px;
             color: white;
@@ -84,25 +114,26 @@
             margin-bottom: 5px;
             letter-spacing: -0.5px;
         }
-
+ 
         .subtitle {
             color: rgba(255, 255, 255, 0.9);
             font-size: 14px;
             font-weight: 500;
         }
-
+ 
         .content {
             padding: 30px 20px;
+            color: #333;
         }
-
+ 
         .problem {
-            background: rgba(255, 150, 0, 0.1);
+            background: rgba(255, 150, 0, 0.08);
             border-left: 4px solid #ff9600;
             padding: 15px;
             margin-bottom: 20px;
             border-radius: 8px;
         }
-
+ 
         .problem-title {
             color: #ff9600;
             font-weight: 600;
@@ -111,19 +142,19 @@
             letter-spacing: 1px;
             margin-bottom: 8px;
         }
-
+ 
         .problem-list {
             list-style: none;
-            color: #ccc;
+            color: #555;
             font-size: 14px;
             line-height: 1.8;
         }
-
+ 
         .problem-list li {
             padding-left: 20px;
             position: relative;
         }
-
+ 
         .problem-list li::before {
             content: '✗';
             position: absolute;
@@ -131,15 +162,15 @@
             color: #ff6b6b;
             font-weight: bold;
         }
-
+ 
         .solution {
-            background: linear-gradient(135deg, rgba(0, 200, 100, 0.1) 0%, rgba(0, 150, 80, 0.1) 100%);
+            background: rgba(0, 200, 100, 0.08);
             border-left: 4px solid #00c864;
             padding: 15px;
             margin-bottom: 20px;
             border-radius: 8px;
         }
-
+ 
         .solution-title {
             color: #00c864;
             font-weight: 600;
@@ -148,13 +179,13 @@
             letter-spacing: 1px;
             margin-bottom: 10px;
         }
-
+ 
         .services {
             display: flex;
             flex-direction: column;
             gap: 10px;
         }
-
+ 
         .service-item {
             display: flex;
             align-items: center;
@@ -163,7 +194,7 @@
             font-size: 14px;
             font-weight: 500;
         }
-
+ 
         .service-item::before {
             content: '✓';
             display: flex;
@@ -176,15 +207,15 @@
             font-weight: bold;
             flex-shrink: 0;
         }
-
+ 
         .pricing {
-            background: rgba(0, 150, 255, 0.05);
+            background: rgba(0, 150, 255, 0.06);
             border: 1px solid rgba(0, 150, 255, 0.2);
             padding: 20px;
             border-radius: 12px;
             margin: 20px 0;
         }
-
+ 
         .price-title {
             color: #0096ff;
             font-weight: 600;
@@ -193,50 +224,50 @@
             letter-spacing: 1px;
             margin-bottom: 15px;
         }
-
+ 
         .price-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10px;
         }
-
+ 
         .price-item {
-            background: rgba(0, 150, 255, 0.1);
+            background: rgba(0, 150, 255, 0.08);
             padding: 12px;
             border-radius: 8px;
             text-align: center;
-            border: 1px solid rgba(0, 150, 255, 0.3);
+            border: 1px solid rgba(0, 150, 255, 0.2);
         }
-
+ 
         .price-label {
-            color: #aaa;
+            color: #666;
             font-size: 12px;
             margin-bottom: 5px;
         }
-
+ 
         .price-value {
             color: #0096ff;
             font-size: 18px;
             font-weight: 700;
         }
-
+ 
         .cta-section {
             margin-top: 20px;
             text-align: center;
         }
-
+ 
         .cta-text {
-            color: #aaa;
+            color: #666;
             font-size: 13px;
             margin-bottom: 15px;
         }
-
+ 
         .cta-buttons {
             display: flex;
             gap: 10px;
             justify-content: center;
         }
-
+ 
         .btn {
             padding: 12px 20px;
             border-radius: 8px;
@@ -248,57 +279,57 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
-
+ 
         .btn-primary {
             background: linear-gradient(135deg, #0096ff 0%, #0073cc 100%);
             color: white;
             flex: 1;
         }
-
+ 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 150, 255, 0.4);
+            box-shadow: 0 10px 25px rgba(0, 150, 255, 0.3);
         }
-
+ 
         .btn-secondary {
             background: rgba(0, 150, 255, 0.1);
             color: #0096ff;
             border: 2px solid #0096ff;
             flex: 1;
         }
-
+ 
         .btn-secondary:hover {
             background: rgba(0, 150, 255, 0.2);
         }
-
+ 
         .footer {
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.04);
             padding: 15px 20px;
             text-align: center;
-            border-top: 1px solid rgba(0, 150, 255, 0.2);
+            border-top: 1px solid rgba(0, 150, 255, 0.1);
         }
-
+ 
         .footer-text {
-            color: #999;
+            color: #888;
             font-size: 12px;
             line-height: 1.6;
         }
-
+ 
         .guarantee {
             color: #00c864;
             font-weight: 600;
             font-size: 13px;
         }
-
+ 
         @media (max-width: 480px) {
             h1 {
                 font-size: 28px;
             }
-
+ 
             .container {
                 max-width: 100%;
             }
-
+ 
             .price-grid {
                 grid-template-columns: 1fr;
             }
@@ -315,7 +346,7 @@
                 <p class="subtitle">Consulenze tecniche rapide ed efficaci</p>
             </div>
         </div>
-
+ 
         <!-- CONTENT -->
         <div class="content">
             <!-- PROBLEMI -->
@@ -330,7 +361,7 @@
                     <li>Dati importanti a rischio</li>
                 </ul>
             </div>
-
+ 
             <!-- SOLUZIONI -->
             <div class="solution">
                 <div class="solution-title">✅ La mia soluzione</div>
@@ -341,7 +372,7 @@
                     <div class="service-item">Risultati garantiti</div>
                 </div>
             </div>
-
+ 
             <!-- PRICING -->
             <div class="pricing">
                 <div class="price-title">💰 Prezzi</div>
@@ -364,7 +395,7 @@
                     </div>
                 </div>
             </div>
-
+ 
             <!-- CTA -->
             <div class="cta-section">
                 <p class="cta-text">👉 Contattami oggi e risolvi il tuo problema</p>
@@ -374,7 +405,7 @@
                 </div>
             </div>
         </div>
-
+ 
         <!-- FOOTER -->
         <div class="footer">
             <p class="footer-text">
@@ -382,14 +413,14 @@
             </p>
         </div>
     </div>
-
+ 
     <script>
         function openWhatsApp() {
             const phone = '393508226604'; // Salvatore
             const message = encodeURIComponent('Ciao! Avrei bisogno di una consulenza tecnica.');
             window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
         }
-
+ 
         function openTelegram() {
             const username = 'salvatore_tech'; // SOSTITUIRE CON TUO USERNAME
             const message = encodeURIComponent('Ciao! Avrei bisogno di una consulenza tecnica.');
@@ -397,4 +428,5 @@
         }
     </script>
 </body>
+</html>
 </html>
