@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chi Sono — Salvatore</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .avatar-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: var(--card);
+      border: 3px solid var(--yellow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+      box-shadow: 0 0 30px rgba(255,208,0,0.2);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    .skill-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .skill-card:hover {
+      border-color: var(--yellow);
+      transform: translateY(-3px);
+    }
+
+    .skill-icon { font-size: 2rem; }
+
+    .skill-name {
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: 1rem;
+      color: var(--white);
+      letter-spacing: 1px;
+    }
+
+    .skill-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .about-text {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #ccc;
+    }
+
+    .about-text strong { color: var(--yellow); }
+
+    .highlight-box {
+      background: var(--card);
+      border-left: 4px solid var(--yellow);
+      border-radius: 4px;
+      padding: 20px 24px;
+      margin-top: 24px;
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.7;
+      font-style: italic;
+    }
+
+    .values-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .values-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.95rem;
+      color: #ccc;
+      line-height: 1.5;
+    }
+
+    .values-list li::before {
+      content: '▸';
+      color: var(--yellow);
+      font-size: 1rem;
+      margin-top: 1px;
+      flex-shrink: 0;
+    }
+
+    .cta-wrap {
+      text-align: center;
+      padding: 48px 24px;
+    }
+
+    .cta-wrap p {
+      color: var(--muted);
+      margin-bottom: 20px;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="index.html">⚡ SALVATORE</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="presentazione.html" class="active">Chi sono</a></li>
+      <li><a href="galleria.html">Galleria</a></li>
+      <li><a href="contatti.html">Contatti</a></li>
+    </ul>
+  </nav>
+
+  <div class="stripe-bar top"></div>
+
+  <div class="page">
+
+    <div class="hero fade-in">
+      <div class="avatar-wrap">
+        <div class="avatar">🔧</div>
+      </div>
+      <div class="hero-tag">⚡ Tecnico Informatico</div>
+      <h1>Chi <span>Sono</span></h1>
+      <p>Passione per l'informatica, dedizione alla riparazione, rispetto per ogni dispositivo che passa tra le mie mani.</p>
+    </div>
+
+    <div class="section fade-in">
+      <div class="section-title">La mia storia</div>
+      <div class="section-divider"></div>
+      <p class="about-text">
+        Mi chiamo <strong>Salvatore</strong> e sono un tecnico informatico con anni di esperienza nella diagnosi e riparazione di dispositivi elettronici. Dalla <strong>microelettronica</strong> ai sistemi complessi, ogni riparazione è per me una sfida da affrontare con metodo e precisione.
+        <br><br>
+        Ho sviluppato competenze nel recupero dati da memorie eMMC, nella sostituzione di componenti BGA, e nella risoluzione di guasti su smartphone, tablet, TV e molto altro. Il mio obiettivo è sempre restituire al cliente un dispositivo funzionante al 100%, quando possibile.
+      </p>
+      <div class="highlight-box">
+        "Ogni dispositivo rotto racconta una storia. Il mio lavoro è capirla e scrivere un nuovo finale."
+      </div>
+    </div>
+
+    <div class="section fade-in">
+      <div class="section-title">Cosa so fare</div>
+      <div class="section-divider"></div>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <div class="skill-icon">📱</div>
+          <div class="skill-name">Smartphone & Tablet</div>
+          <div class="skill-desc">Riparazione display, batterie, porte di ricarica, schede madri.</div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon">💾</div>
+          <div class="skill-name">Recupero Dati</div>
+          <div class="skill-desc">Chip-off eMMC, recupero da memorie danneggiate, micro-saldatura.</div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon">📺</div>
+          <div class="skill-name">TV & Monitor</div>
+          <div class="skill-desc">Sostituzione schede main, alimentatori, pannelli e backlight.</div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon">🖥️</div>
+          <div class="skill-name">PC & Laptop</div>
+          <div class="skill-desc">Diagnosi hardware, sostituzione componenti, upgrade e ottimizzazione.</div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon">🔌</div>
+          <div class="skill-name">Micro-saldatura</div>
+          <div class="skill-desc">Lavoro con componenti BGA e SMD sotto microscopio stereoscopico.</div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon">🛠️</div>
+          <div class="skill-name">Elettrodomestici</div>
+          <div class="skill-desc">Diagnosi e riparazione di dispositivi domestici e piccoli elettrodomestici.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section fade-in">
+      <div class="section-title">I miei valori</div>
+      <div class="section-divider"></div>
+      <ul class="values-list">
+        <li>Onestà nella diagnosi: se un dispositivo non è riparabile, lo dico chiaramente.</li>
+        <li>Preventivo trasparente prima di qualsiasi intervento.</li>
+        <li>Garanzia sul lavoro svolto e sui ricambi installati.</li>
+        <li>Tempi di consegna rispettati e comunicazione costante col cliente.</li>
+        <li>Passione genuina per la tecnologia e il recupero dei dispositivi.</li>
+      </ul>
+    </div>
+
+    <div class="cta-wrap fade-in">
+      <p>Hai un dispositivo da riparare? Contattami senza impegno.</p>
+      <a href="contatti.html" class="btn">📩 Contattami</a>
+    </div>
+
+  </div>
+
+  <div class="stripe-bar bottom"></div>
+
+</body>
+</html>
